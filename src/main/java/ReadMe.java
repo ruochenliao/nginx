@@ -6,6 +6,8 @@
  * 反向代理:
  * 客户端访问google, google 提供反向代理服务，根据情况，决定转发到 hongkong 谷歌，还是美国谷歌服务器（服务端决定代理服务器）
  *
+ * 负载均衡:
+ *
  */
-public class nginx {
+public class ReadMe {
 }
