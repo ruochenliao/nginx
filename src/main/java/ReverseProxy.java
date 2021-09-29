@@ -23,8 +23,15 @@
  *                                                              2.3 redirect     返回302临时重定向，地址栏会显示跳转后的地址
  *                                                              2.4 permanent    返回301永久重定向，地址栏会显示跳转后的地址
  *
- *             proxy_pass  127.0.0.1:7001;     //设置被代理server的协议和地址
- *                                             //跳转到 127.0.0.1:7001 跳转到 7001 端口
+ *             proxy_pass  127.0.0.1:7001/remote;      //设置被代理server的协议和地址
+ *                                                     //1、地址可以为域名或IP
+ *                                                     //2、在proxy_pass前面用了rewrite
+ *                                                     //3、如果url包括uri，则request中的uri部分会被proxy_pass中的uri取代
+ *                                                          比如request http://example.com/name/test.html 会被代理到 http://example.com/remote/test.html
+ *                                                     //4、如果url不包括uri,uri会保持原样传送给后端server
+ *                                                          比如
+ *                                                     //5、当在后面的url加上了/，相当于是绝对路径，如果没有/，表示相对路径，把匹配的路径部分也给代理走。
+ *
  *
  *             if($invalid_referer){                    //if (condition){...}
  *                  rewrite ^/ http://$host/logo.png;   //1、直接比较变量和内容时，使用=或!=
